@@ -148,3 +148,43 @@ def evaluate_clf_model(model, X_train, y_train, X_test, y_test, classes=[], labe
     
 
     return report, fig, ax
+
+def run_model(name, params=None, data=None, report=True):
+    """
+    Fits and evaluates model
+    
+    Args:
+        name (str): Name of model.
+                    {'RF', 'XGB', 'NB', 'SVM'}
+                    
+        params (dict): Dictionary of parameters for the model.
+        
+        **data (dataframe): X_train, X_test, y_train, y_test
+        
+        report (bool): True if classification report/confusion matrix is wanted.
+    
+    Returns:
+        model (object): fitted model
+    """
+
+    if name == 'RF':
+        if params:
+            clf = RandomForestClassifier(**params)
+        else:
+            clf = RandomForestClassifier()
+    elif name == 'NB':
+        if params:
+            clf = MultinomialNB(**params)
+        else:
+            clf = MultinomialNB()
+    elif name == 'XGB':
+        clf = XGBClassifier(**params)
+    
+    clf.fit(data['X_train'], data['y_train'])
+    
+    if report:
+        evaluate_clf_model(clf, data['X_train'], data['y_train'],
+                           data['X_test'], data['y_test'],
+                           classes=['Negative emotion', 'Positive emotion'],
+                           label=f'{name.capitalize()} Classifier');
+    return clf
