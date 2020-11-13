@@ -7,6 +7,8 @@
 
 - **Datasets**: This <a href="https://github.com/singsang2/dsc-mod-4-project-v2-1-onl01-dtsc-ft-070620/tree/master/datasets">folder</a> contains all the datasets used in this project.
 
+- **Models**: This <a href="https://github.com/singsang2/dsc-mod-4-project-v2-1-onl01-dtsc-ft-070620/tree/master/models">folder</a> contains all the models trained and used in this project.
+
 - **Additional Codes**: This <a href="https://github.com/singsang2/dsc-mod-4-project-v2-1-onl01-dtsc-ft-070620/tree/master/src">folder</a> contains any other codes that were used for this project.
 
 # Introduction
@@ -24,14 +26,14 @@ In this project, we will deal with a portion of what we have mentioned above. We
 ### Goals
 The goal of this project is to produce a model that can efficiently
 
-[1] identify tweets with negative sentiments towards a product (ex. Apple, Google, or Android products),
+[1] identify tweets with negative sentiments towards a product (ex. Apple, Google, or Android products), and
 -  By identifying negative tweets, a company can provide relatively quick feedback to the customers which will improve brand's image and credibility.
         
-[2] identify which product a tweet is mentioning, and
-- A company/brand usually has more than just one product (ex. Apple), so by correctly identifying which product tweets are mentioning, it will be more beneficial to the company be aware of their products review by people.
-        
-[3] correctly categorize tweets into negative, neutral and positive sentiments.
+[2] correctly categorize tweets into negative, neutral and positive sentiments.
 - By cumulating various sentiments about a company's various products, a company could read and predict people's trend.
+
+[Extra] We will also train a model that can identify which product a tweet is mentioning.
+- A company/brand usually has more than just one product (ex. Apple), so by correctly identifying which product tweets are mentioning, it will be more beneficial to the company be aware of their products review by people.
 
 ## Data
 
@@ -80,6 +82,8 @@ The following table shows the top 5 model that performed for binary classificati
 
 Logistic Regression model using word embedding did the best in terms for negative recalls; however it does have a longer average time to fit and predict the result signifcantly.
 
+<img src='images/computing_time.png' width='500'> <img src='images/negative_recalls.png' width='500'>
+
 The best model was using `MulticlassNB` with spaCy's word embedding.
 
 <img src='images/binary_word_emb.png' width='500'>
@@ -111,18 +115,20 @@ Our final models can
         * Most 81% accuracy with 76% negative sentiment recall
     [2] Multiclass Sentiment
         * 60% accuracy with 71% negative sentiment recall 
-    [3] Product Predictor
+    [EXTRA] Product Predictor
         * 91% of accuracy
 
-## Recommendation
+## Recommendations
 We would recommend the following:
 
-[1] Use binary sentiments (positive and negative): 
-   - Multilcass not only complicates the model itself, but also it dilutes negative and positive sentiments together, therefore, we recommend using binary sentiment classification model
+[1] **Use binary sentiments (positive and negative)**
+   - Multiclass not only complicates the model itself, but also it dilutes negative and positive sentiments together, therefore, we recommend using binary sentiment classification model
     
-[2] There are two models that we recommend: 
-   - logistic regression word-embedding model: this is the best model to flag negative sentiments but it does take some time to train; however, as long as the train is well-done, implementing the model should not cause significant calculation cost. (Further study should be done)
-   - Naive Bayes' TF-IDF model with SMOTE: this model also did a great job in identifying negative sentiments, but it uses SMOTE which is not recommended in NLP analysis.
+[2] **For the best negative recall model:** *logistic regression word-embedding model*
+   - this is the best model to flag negative sentiments but it does take some time to train; however, as long as the train is well-done, implementing the model should not cause significant calculation cost. (Further study should be done)
+
+[3] **For the fastest computing model:** *Naive Bayes' TF-IDF model with SMOTE*
+   - this model also did a great job in identifying negative sentiments, but it uses SMOTE which is not recommended in NLP analysis.
 
 # Future Direction
 
